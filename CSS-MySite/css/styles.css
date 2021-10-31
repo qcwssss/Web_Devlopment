@@ -9,11 +9,13 @@ h1 {
   font-family: 'Sacramento', cursive;
   font-size: 5.25rem;
   color: #66BFBF;
+  line-height: 2;
 }
 
 h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
+  font-weight: normal;
   color: #66BFBF;
 }
 
@@ -48,15 +50,39 @@ h3 {
   height: 200px;
 }
 
+.skill-row {
+  width:50%;
+  margin: 100px auto 100px auto;
+  text-align: left;
+  line-height: 2;
+
+
+}
+
+.code-img {
+  width: 25%;
+  float: left;
+  margin-right: 30px;
+}
+
+.chilli-img {
+  width: 25%;
+  float: right;
+  margin-left: 30px;
+}
+
+.chllic-description {
+  clear: right;
+}
+
 .chen-img {
-  height: 200px;
+  height: 25%;
 }
 
 .middle-container {}
 
 .bottom-container {}
-  
+
 a {
   color: #11999E;
-
 }
