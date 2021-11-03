@@ -15,13 +15,23 @@ h1 {
   line-height: 1.5;
 }
 
+h3 {
+  font-family: "Montserrat";
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+p {
+  color: #8f8f8f;
+}
+
 .container-fluid {
   padding: 3% 15%;
 }
 
 /* Navigation Bar */
 .navbar {
-  padding:0 0 4.5rem;
+  padding: 0 0 4.5rem;
 }
 
 .navbar-brand {
@@ -48,4 +58,23 @@ h1 {
 .title-img {
   width: 60%;
   transform: rotate(25deg);
+}
+
+/* Features Section */
+#features {
+  padding: 7% 12%;
+}
+
+.feature-box {
+  text-align: center;
+  padding: 5%;
+}
+
+.feature-icon {
+  color: #ef8172;
+  margin-bottom: 1rem;
+}
+
+.feature-icon:hover {
+  color: #ff4c68;
 }
