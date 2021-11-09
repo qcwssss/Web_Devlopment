@@ -3,7 +3,12 @@ console.log($("img").attr("src"));
 
 // eventListener
 $("button").click(function(){
-  $("h1").css("color", "red");
+  //$("h1").toggle();
+  // fadeIn fadeOut
+  //$("h1").fadeToggle();
+  $("h1").slideToggle().animate({opacity:0.5});
+
+
 });
 
 // key input
