@@ -5,11 +5,14 @@ for (var i = 0; i < allButtons.length; i++) {
   allButtons[i].addEventListener("click", function() {
     var innerHTML = this.innerHTML;
     makeSound(innerHTML);
+    buttonAnimation(innerHTML);
   });
 }
 
 document.addEventListener("keydown", function(event) {
   makeSound(event.key);
+  buttonAnimation(event.key);
+
 });
 
 function makeSound(key) {
@@ -52,7 +55,22 @@ function makeSound(key) {
 
     default:
       console.log(event.key);
+  }
+}
+
+function buttonAnimation(currentKey) {
+
+  var validKey = ["w", "a", "s", "d", "j", "k", "l"];
+
+  if (validKey.includes(currentKey)) {
+    var activeButton = document.querySelector("." + currentKey);
+
+    activeButton.classList.add("pressed");
+    setTimeout(function() {
+      activeButton.classList.remove("pressed");
+    }, 100);
 
   }
+
 
 }
