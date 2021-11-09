@@ -29,9 +29,22 @@ function nextSequence() {
   playSound(randomChosenColour);
 
   // update title
-  $("h1").text("Level " + level);
   level++;
+  $("h1").text("Level " + level);
 
+}
+
+function checkAnswer(currentLevel) {
+  if (userClickedPattern[currentLevel] === gamePattern[gamePattern.length - 1]) {
+    console.log("success");
+    //check that they have finished their sequence with another if statement.
+    if (userClickedPattern.length === gamePattern.length) {
+      setTimeout(nextSequence(), 1000);
+      userClickedPattern = [];
+    }
+  } else {
+    console.log("wrong");
+  }
 }
 
 // handle click
@@ -41,6 +54,7 @@ $(".btn").click(function() {
   console.log(userClickedPattern);
   animatePress(userChosenColour);
   playSound(userChosenColour);
+  checkAnswer(userClickedPattern.length - 1);
 });
 
 // detect keyboard pressed
@@ -50,6 +64,5 @@ $(document).keydown(function(event) {
     numOfKeypressed.push(event.key);
     nextSequence();
   }
-
 
 });
