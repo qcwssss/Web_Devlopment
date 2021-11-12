@@ -22,10 +22,10 @@ app.get("/bmicalculator", function(req, res) {
   res.sendFile(__dirname + "/bmiCalculator.html");
 });
 
-app.post("/bmiCalculator", function(req, res) {
-  var w = Number(req.body.weight);
-  var h = Number(req.body.height);
-  var bmi = w/n;
+app.post("/bmicalculator", function(req, res) {
+  var w = parseFloat(req.body.weight);
+  var h = parseFloat(req.body.height);
+  var bmi = w/(h * h);
   res.send("Your BMI is " + bmi);
 })
 
