@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
 
+require('dotenv').config();
+// console.log(process.env);
+
 const app = express();
 
 app.use(express.static("public"));
@@ -38,7 +41,7 @@ app.post("/", function(req, res) {
 
   const options = {
     method: "POST",
-    auth: "chen1:ea3f408351fc6835974989e319894bdf-us20"
+    auth: "chen1:" + process.env.API_Key
   }
 
   const request = https.request(url, options, function(response) {
@@ -66,8 +69,7 @@ app.listen(process.env.PORT || 3000, function(req, res) {
   console.log("Server is running on port 3000");
 });
 
-// API Key:
-// ea3f408351fc6835974989e319894bdf-us20
+
 
 // audience ID
 // a0e687fd3a
