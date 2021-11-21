@@ -7,11 +7,18 @@
 </head>
 
 <body>
-<%  if (kindOfDay === "Sunday") { %>
-    <h1 style="color:purple">It's a <%= kindOfDay %> ToDo List!</h1>
-<%   } else { %>
-    <h1 style="color:green">It's a <%= kindOfDay %> ToDo List!</h1>
-<%  } %>
+  <h1> <%= kindOfDay %> </h1>
+  <ul>
+    <% for (var i = 0; i < newListItems.length; i++) { %>
+      <li> <%= newListItems[i] %></li>
+    <% } %>
+
+  </ul>
+
+  <form class="todo-input" action="/" method="post">
+    <input type="text" name="newItem" placeholder="What to do next?" required autofocus>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="button" type="submit">Add</button>
+  </form>
 
 </body>
 
