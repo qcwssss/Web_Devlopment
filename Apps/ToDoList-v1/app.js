@@ -1,6 +1,7 @@
 //jshint esversion: 6
 const express = require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js");
 
 const app = express();
 
@@ -18,14 +19,8 @@ let items = ["Buy Food", "Eat Food", "Cook Food"];
 let workItems = [];
 
 app.get("/", function(req, res) {
-  let today = new Date();
-
-  let options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-  };
-  let day = today.toLocaleDateString("en-US", options);
+  // let day = date.getDate();
+  let day = date.getDay();
 
   res.render("list", {
     listTitle: day,
@@ -45,8 +40,6 @@ app.post("/", function(req, res) {
     items.push(item);
     res.redirect("/");
   }
-
-
 });
 
 app.get("/work", function(req, res) {
@@ -56,7 +49,7 @@ app.get("/work", function(req, res) {
   });
 });
 
-app.get("/about", function(req,res) {
+app.get("/about", function(req, res) {
   res.render("about");
 });
 
