@@ -1,40 +1,23 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<%- include("header"); -%>
+<div class="box" id="heading">
+  <h1> <%= listTitle %> </h1>
+</div>
 
-<head>
-  <meta charset="utf-8">
-  <title>To Do List</title>
-  <link rel="stylesheet" href="styles/styles.css">
-</head>
-
-<body>
-
-  <div class="box" id="heading">
-    <h1> <%= listTitle %> </h1>
-  </div>
-
-  <div class="box">
-    <% for (var i = 0; i < newListItems.length; i++) { %>
-    <div class="item">
-      <input type="checkbox">
-      <p> <%= newListItems[i] %>
-      <p>
-
-    </div>
-    <% } %>
-
-    <form class="item" action="/" method="post">
-      <input type="text" name="newItem" placeholder="New Item" require autofocus autocomplete="off">
-      <button class="btn" type="submit" name="button" type="submit">+</button>
-    </form>
+<div class="box">
+  <% for (var i = 0; i < newListItems.length; i++) { %>
+  <div class="item">
+    <input type="checkbox">
+    <p> <%= newListItems[i] %>
+    <p>
 
   </div>
+  <% } %>
 
+  <form class="item" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item" require autofocus autocomplete="off">
+    <button name="list" type="submit" value=<%=listTitle %>>+</button>
+  </form>
 
+</div>
 
-
-
-
-</body>
-
-</html>
+<%- include("footer"); -%>

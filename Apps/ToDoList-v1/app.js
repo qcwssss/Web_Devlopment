@@ -35,22 +35,29 @@ app.get("/", function(req, res) {
 });
 
 app.post("/", function(req, res) {
-  const todo_next = req.body.newItem;
-  items.push(todo_next);
-  res.redirect("/");
+  // console.log(req.body);
+
+  let item = req.body.newItem;
+  if (req.body.list === "Work") {
+    workItems.push(item);
+    res.redirect("/work");
+  } else {
+    items.push(item);
+    res.redirect("/");
+  }
+
+
 });
 
 app.get("/work", function(req, res) {
   res.render("list", {
-    listTitle: "Workday",
+    listTitle: "Work",
     newListItems: workItems
   });
 });
 
-app.post("/work", function(req, res) {
-  let item = req.body.newItem;
-  workItems.push(item);
-  res.redirect("/work");
+app.get("/about", function(req,res) {
+  res.render("about");
 });
 
 app.listen(3000, function() {
