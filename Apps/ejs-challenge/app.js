@@ -12,13 +12,19 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(express.static("public"));
+
+// global variable
+const posts = [];
 
 // get route
 app.get("/", function(req, res) {
   res.render("home", {
-    startingContent: homeStartingContent
+    startingContent: homeStartingContent,
+    posts: posts
   });
 });
 
@@ -36,17 +42,21 @@ app.get("/contact", function(req, res) {
 
 app.get("/compose", function(req, res) {
   res.render("compose");
-})
+});
 
 
 // post
 app.post("/compose", function(req, res) {
-  let content = req.body.postTitle;
-  console.log(content);
+  const postContent = {
+    postTitle: req.body.postTitle,
+    postBody: req.body.postBody
+  };
+  posts.push(postContent);
+  res.redirect("/");
+
+  console.log(posts);
+
 });
-
-
-
 
 
 
