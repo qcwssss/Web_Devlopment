@@ -39,17 +39,44 @@ async function main() {
 
   const personSchema = new mongoose.Schema({
     name: String,
-    age: Number
+    age: Number,
+    favouriteFruit: fruitSchema
+
   });
 
   const Person = mongoose.model("Person", personSchema);
 
-  const person = new Person({
-    name: "John",
-    age: 37
+  const lemon = new Fruit({
+    name: "Lemon",
+    score: 9,
+    review: "Unbeliveable"
   });
 
+  lemon.save();
+
+  // const person = new Person({
+  //   name: "Amy",
+  //   age: 12,
+  //   favouriteFruit: lemon
+  // });
+  //
   // person.save();
+
+  const grape = new Fruit({
+    name: "grape",
+    score: 9,
+    review: "Sour but so good"
+  });
+
+  grape.save();
+
+  Person.updateOne({name: "John" }, {favouriteFruit: grape}, function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Successfully updated John's favourite");
+    }
+  });
 
   // Person.deleteMany({name: "John"}, function(err) {
   //     if (err) {
