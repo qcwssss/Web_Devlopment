@@ -13,12 +13,12 @@ async function main() {
 
   // Creating the Schema.
   const fruitSchema = new mongoose.Schema({
-    name: {     // Validator
+    name: { // Validator
       type: String,
       required: [true, "Fruits must have a name."],
     },
-    rating: {    // Validator
-      type:Number,
+    rating: { // Validator
+      type: Number,
       min: [1, "min >= 1"],
       max: [10, "max <= 10"],
     },
@@ -35,26 +35,76 @@ async function main() {
     review: "eww!",
   });
   // Save fruit document. Remember to comment it after the first time you launch app.js.
-  await fruit.save();
+  // await fruit.save();
+
+  const personSchema = new mongoose.Schema({
+    name: String,
+    age: Number
+  });
+
+  const Person = mongoose.model("Person", personSchema);
+
+  const person = new Person({
+    name: "John",
+    age: 37
+  });
+
+  // person.save();
+
+  // Person.deleteMany({name: "John"}, function(err) {
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       console.log("Successfully deleted Person document");
+  //     }
+  //   });
 
 
 
-// Find all the fruits inside fruits collection with mongoose .find({}, callback).
-Fruit.find({}, (err, fruits) => {
-  if (err) {
-    return handleError(err); // not if this is the correct way to handle errors in async function
-  } else {
+  // Fruit.create( {name: "Peach" }, {rating: 5}, {review: "just ok"}, function(err) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log("Successfully inserted Fruits document");
+  //   }
+  // });
 
-    // Close connection to database!
-    mongoose.connection.close();
+  // Fruit.updateOne({_id: "61a2d4eabae70accbc851508"  }, {name: "Peach" }, function(err) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log("Successfully updated Fruits document");
+  //   }
+  // });
 
-    // Console log all the fruit names inside fruits collection.
-    fruits.forEach(fruit => {
-      console.log(fruit.name);
-    });
-  }
+  // Fruit.deleteOne({
+  //   name: "Peach"
+  // }, function(err) {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //
+  //     console.log("Successfully deleted Fruits document");
+  //   }
+  // });
 
-});
+
+  // Find all the fruits inside fruits collection with mongoose .find({}, callback).
+  Fruit.find({}, (err, fruits) => {
+    if (err) {
+      return handleError(err); // not if this is the correct way to handle errors in async function
+    } else {
+
+      // Close connection to database!
+      mongoose.connection.close();
+
+      // Console log all the fruit names inside fruits collection.
+      fruits.forEach(fruit => {
+        console.log(fruit.name);
+      });
+    }
+  });
+
 
 
 }
