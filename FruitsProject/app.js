@@ -1,72 +1,61 @@
-// jshint esversion:6
+// jshint esversion: 6
+
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/fruitsDB");
 
-const fruitSchema = new mongoose.Schema({
-  name: String,
-  rating: Number,
-  review: String
-});
+// Call async main function declared below and catch any errors at the end.
+main().catch(err => console.log(err));
 
-const Fruit = mongoose.model("Fruit", fruitSchema);
 
-const fruit = new Fruit({
-  name: "Apple",
-  rating: 7,
-  review: "Pretty solid as a fruit."
-});
+// Go read this for a better understanding of async and await:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+async function main() {
+  await mongoose.connect('mongodb://localhost:27017/fruitsDB');
 
-// fruit.save();
+  // Creating the Schema.
+  const fruitSchema = new mongoose.Schema({
+    name: {     // Validator
+      type: String,
+      required: [true, "Fruits must have a name."],
+    },
+    rating: {    // Validator
+      type:Number,
+      min: [1, "min >= 1"],
+      max: [10, "max <= 10"],
+    },
+    review: String,
+  });
 
-const personSchema = new mongoose.Schema({
-  name: String,
-  age: Number
-});
+  // Compiling Schema into a Model.
+  const Fruit = mongoose.model("Fruit", fruitSchema);
 
-const Person = mongoose.model("Person", personSchema);
+  // Create a fruit document with properties and behaviors as declared in our Schema.
+  const fruit = new Fruit({
+    name: "Mandarino",
+    rating: 1,
+    review: "eww!",
+  });
+  // Save fruit document. Remember to comment it after the first time you launch app.js.
+  await fruit.save();
 
-const person = new Person({
-  name: "John",
-  age: 37
-});
 
-person.save();
 
-// add more fruits
-const kiwi = new Fruit({
-  name: "Kiwi",
-  score: 10,
-  review: "The best fruit"
-});
-
-const orange = new Fruit({
-  name: "Orange",
-  score: 4,
-  review: "Too sour"
-});
-
-const banana = new Fruit({
-  name: "Banana",
-  score: 3,
-  review: "Wierd texture"
-});
-
-// Fruit.insertMany([kiwi, orange, banana], function(err) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log("Successfully saved all fruits to fruitsDB");
-//   }
-// });
-Fruit.find(function(err, fruits) {
+// Find all the fruits inside fruits collection with mongoose .find({}, callback).
+Fruit.find({}, (err, fruits) => {
   if (err) {
-    console.log(err);
+    return handleError(err); // not if this is the correct way to handle errors in async function
   } else {
-    // mongoose.connection.close(); // ??
-    // mongoose.disconnect();
 
-    fruits.forEach(function(element) {
-      console.log(element.name);
+    // Close connection to database!
+    mongoose.connection.close();
+
+    // Console log all the fruit names inside fruits collection.
+    fruits.forEach(fruit => {
+      console.log(fruit.name);
     });
   }
+
 });
+
+
+}
+// end of async main func.
