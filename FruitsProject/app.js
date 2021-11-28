@@ -58,12 +58,15 @@ const banana = new Fruit({
 //     console.log("Successfully saved all fruits to fruitsDB");
 //   }
 // });
-
 Fruit.find(function(err, fruits) {
-      if (err) {
-        console.log(err);
-      } else {
-        // console.log(fruits);
-        fruits.forEach((element) => console.log(element.name));
-      }
+  if (err) {
+    console.log(err);
+  } else {
+    // mongoose.connection.close(); // ??
+    // mongoose.disconnect();
+
+    fruits.forEach(function(element) {
+      console.log(element.name);
     });
+  }
+});
