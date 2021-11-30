@@ -1,4 +1,5 @@
 //jshint esversion:6
+require('dotenv').config();
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -6,6 +7,7 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 
 const app = express();
+// console.log(process.env);
 
 app.set('view engine', 'ejs');
 
@@ -15,7 +17,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // connect to mongoDB
-mongoose.connect("mongodb+srv://admin-chen:<password>@todolist.kiolx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/todolistDB");
+const mongoKey = process.env.MONGO_KEY;
+mongoose.connect("mongodb+srv://admin-chen:" + mongoKey + "@todolist.kiolx.mongodb.net/todolistDB");
 
 const itemsSchema = {
   name: String
