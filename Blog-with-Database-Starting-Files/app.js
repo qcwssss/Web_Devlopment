@@ -65,26 +65,35 @@ app.post("/compose", function(req, res) {
     content: req.body.postBody
   });
 
-  newPost.save();
+  newPost.save(function(err) {
+    if (!err) {
+      res.redirect("/");
+    } else {
+      log(err);
+    }
+  });
 
-  res.redirect("/");
 
 });
 
 app.get("/posts/:postName", function(req, res) {
   const requestedTitle = _.lowerCase(req.params.postName);
 
-  posts.forEach(function(post) {
-    const storedTitle = _.lowerCase(post.title);
+  posts = Post.find({}, function(err, posts) {
+    // console.log(posts);
 
-    if (storedTitle === requestedTitle) {
-      res.render("post", {
-        title: post.title,
-        content: post.content
-      });
-    }
+    posts.forEach(function(post) {
+      const storedTitle = _.lowerCase(post.title);
+
+      if (storedTitle === requestedTitle) {
+        res.render("post", {
+          title: post.title,
+          content: post.content
+        });
+      }
+    });
+
   });
-
 });
 
 app.listen(3000, function() {
