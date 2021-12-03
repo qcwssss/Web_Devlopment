@@ -28,7 +28,6 @@ const postSchema = {
 
 const Post = mongoose.model("Post", postSchema);
 
-// let posts = [];
 
 app.get("/", function(req, res) {
 
@@ -72,27 +71,16 @@ app.post("/compose", function(req, res) {
       log(err);
     }
   });
-
-
 });
 
-app.get("/posts/:postName", function(req, res) {
-  const requestedTitle = _.lowerCase(req.params.postName);
+app.get("/posts/:postId", function(req, res) {
+  const requestedPostId = req.params.postId;
 
-  posts = Post.find({}, function(err, posts) {
-    // console.log(posts);
-
-    posts.forEach(function(post) {
-      const storedTitle = _.lowerCase(post.title);
-
-      if (storedTitle === requestedTitle) {
+  posts = Post.findOne({_id: requestedPostId}, function(err, post) {
         res.render("post", {
           title: post.title,
           content: post.content
         });
-      }
-    });
-
   });
 });
 
