@@ -1,44 +1,67 @@
-// alert("Hello world")
+const person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 30,
+    hobbies:['music', 'movies', 'sports'],
+    address: {
+        street: '50 main st',
+        city: 'Boston',
+        state: 'MA'
+    }
+}
 
-// console.log("Hello World");s
-// console.error("error!");
-// console.warn('This is an warning');
+// alert(person)
+console.log(person.hobbies[1]);
+
+// deconstruct
+const { firstName, lastName, address: { city }} = person;
+console.log(city);
+
+person.email = '123@email';
+console.log(person.email);
+
+const todos = [
+    {
+        id: 1, 
+        text: 'Take out trash',
+        isCompleted: true
+    },
+    {
+        id: 2, 
+        text: 'Meeting with boss',
+        isCompleted: true
+    },
+    {
+        id: 3, 
+        text: 'Dentist appt',
+        isCompleted: true
+    },
+
+]
+
+// console.log(todos);
+console.log(todos[2].text);
+
+const todoJSON = JSON.stringify(todos);
+// console.log(todoJSON);
+
+// For loops
+// for (let i = 0; i < 10; i++) {
+//     console.log(`number ${i}`);
+// }
+
+// while
+let i = 0;
+while (i < 3) {
+    console.log(`while number ${i}`);
+    i++
+}
+
+// of loop
+for (let todo of todos) {
+    console.log(todo.text);
+    // console.log(todo.id);
+}
 
 
-// Data type: String, Numbers, Boolean, null, undefined
-const firstname = 'John';
-const age = 30;
-const rating = 4.5;
-const isCool = true;
-const x = null;
-const y = undefined;
-let z;
 
-console.log(typeof z);
-
-// Concatenation
-// Template String
-console.log(`My name is is ${firstname} and I am ${age} old` );
-
-const s = 'Hello World';
-console.log(s.substring(0, 7).toUpperCase());
-
-// split by letter
-console.log(s.split(' '));
-
-// Arrays
-const numbers = new Array(1, 2, 3);
-console.log(numbers);
-
-const fruits = ['apples', 'bananas', 5, 'pears'];
-fruits[3] = 'grapes'; // reassign
-
-fruits.push('mangos');
-fruits.unshift('strawberries');
-
-// is it an Array
-console.log(Array.isArray(fruits));
-
-console.log(fruits.indexOf('pears'));
-
-console.log(fruits);
