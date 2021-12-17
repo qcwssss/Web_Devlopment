@@ -34,34 +34,40 @@ const todos = [
     {
         id: 3, 
         text: 'Dentist appt',
-        isCompleted: true
+        isCompleted: false
     },
 
 ]
 
-// console.log(todos);
 console.log(todos[2].text);
 
 const todoJSON = JSON.stringify(todos);
-// console.log(todoJSON);
 
-// For loops
-// for (let i = 0; i < 10; i++) {
-//     console.log(`number ${i}`);
+// // of loop
+// for (let todo of todos) {
+//     console.log(todo.text);
 // }
 
-// while
-let i = 0;
-while (i < 3) {
-    console.log(`while number ${i}`);
-    i++
-}
+// forEach, map, filter
+todos.forEach(function(elt) {
+    console.log(elt.text);
+});
 
-// of loop
-for (let todo of todos) {
-    console.log(todo.text);
-    // console.log(todo.id);
-}
+const todoText = todos.map(function(elt) {
+    return elt.text;
+});
+
+console.log(todoText);
+
+// chain filter and map
+const todoCompleted = todos.filter(function(elt) {
+    return elt.isCompleted === true;
+})
+.map(function(elt) {
+    return elt.text;
+});
+
+console.log(todoCompleted);
 
 
 
